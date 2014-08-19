@@ -13,9 +13,9 @@ The data for this project can be downloaded from here
 [Project Data](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
  
 The R script `run_analysis.R` can be used to generate a second dataset `MeansBySubjectAndActivity.txt`
-performing the following steps:
+by performing the following steps:
 
-The R script ...
+The R script ...      
 1. Merges the training and the test sets to create one data set.    
 2. Extracts only the measurements on the mean and standard deviation for each measurement.     
 3. Uses descriptive activity names to name the activities in the data set   
