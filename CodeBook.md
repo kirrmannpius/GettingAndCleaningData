@@ -44,16 +44,17 @@ the source of the values in the maniplated data set.
     * 6             LAYING
       
 Naming convention for the following variables
->    prefix t: time series
->    prefix f: Fourier-transformed
->    Acc: data from accelerometer
->    Gyro: data from gyroscope
->    mean(): mean value
->    std(): standard deviation
->    -X: X-direction
->    -Y: Y-direction
->    -Z: Z-direction
-Note: all values have been aggregated, i.e. mean() was applied (also for std()).
+>    prefix t: time series     
+>    prefix f: Fourier-transformed     
+>    Acc: data from accelerometer     
+>    Gyro: data from gyroscope     
+>    mean(): mean value     
+>    std(): standard deviation     
+>    -X: X-direction     
+>    -Y: Y-direction     
+>    -Z: Z-direction     
+
+Note: all values have been aggregated, i.e. mean() was applied (also for std()).     
 
              
 * "tBodyAcc-mean()-X"
