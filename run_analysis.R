@@ -1,23 +1,18 @@
 run_analysis <- function( ) {
-    # Create a temporary file
-    temp <- tempfile()
-    # Download zip-file containing the project data from the url given in the
-    # assignment document
-    urlData <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-    download.file(urlData, temp)
+    # path + filename
+    urlData <- paste(getwd(),"/getdata-projectfiles-UCI HAR Dataset.zip", sep="")
     # read test data. Activities and subjects are listed seperately
-    dfX_test <- read.table(unz(temp, "UCI HAR Dataset/test/X_test.txt"), header=FALSE)
-    dfy_test <- read.table(unz(temp, "UCI HAR Dataset/test/y_test.txt"), header=FALSE)
-    dfsubj_test <- read.table(unz(temp,"UCI HAR Dataset/test/subject_test.txt"), header=FALSE)
+    dfX_test <- read.table(unz(urlData, "UCI HAR Dataset/test/X_test.txt"), header=FALSE)
+    dfy_test <- read.table(unz(urlData, "UCI HAR Dataset/test/y_test.txt"), header=FALSE)
+    dfsubj_test <- read.table(unz(urlData,"UCI HAR Dataset/test/subject_test.txt"), header=FALSE)
     # read training data
-    dfX_train <- read.table(unz(temp, "UCI HAR Dataset/train/X_train.txt"), header=FALSE)
-    dfy_train <- read.table(unz(temp, "UCI HAR Dataset/train/y_train.txt"), header=FALSE)
-    dfsubj_train <- read.table(unz(temp,"UCI HAR Dataset/train/subject_train.txt"), header=FALSE)
+    dfX_train <- read.table(unz(urlData, "UCI HAR Dataset/train/X_train.txt"), header=FALSE)
+    dfy_train <- read.table(unz(urlData, "UCI HAR Dataset/train/y_train.txt"), header=FALSE)
+    dfsubj_train <- read.table(unz(urlData,"UCI HAR Dataset/train/subject_train.txt"), header=FALSE)
     # read features (index/descriptive name)
-    dfFeatures <- read.table(unz(temp, "UCI HAR Dataset/features.txt"), header=FALSE)
+    dfFeatures <- read.table(unz(urlData, "UCI HAR Dataset/features.txt"), header=FALSE)
     # get activity labels
-    dfActivities <- read.table(unz(temp, "UCI HAR Dataset/activity_labels.txt"), header=FALSE)
-    unlink(temp)
+    dfActivities <- read.table(unz(urlData, "UCI HAR Dataset/activity_labels.txt"), header=FALSE)
     # (1.) Merge test and train data to create one data set
     dfData <- rbind(dfX_test, dfX_train)
     dfDataActivities <-  rbind(dfy_test, dfy_train)
@@ -42,5 +37,6 @@ run_analysis <- function( ) {
     dfDataMeanStd$subject <- dfDataSubjects$subject
     # (5.) Calculate average of each variable for each activity and each subject
     aggMean <- aggregate(x = dfDataMeanStd[,1:66], by=list(subject=dfDataMeanStd$subject, activity=dfDataMeanStd$activity), FUN=mean)
-    write.table(aggMean,file="MeansBySubjectAndActivity.txt")    
+    # create txt file (without row names)
+    write.table(aggMean,file="MeansBySubjectAndActivity.txt", row.name=FALSE)    
 }
